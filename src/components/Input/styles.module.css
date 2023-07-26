@@ -1,0 +1,8 @@
+.form__group > input {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    height: 40px;
+    border-radius: 3px;
+    max-width: 100%;
+    padding: 0px 8px;
+}
