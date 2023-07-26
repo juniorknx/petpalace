@@ -1,9 +1,11 @@
+import styles from './styles.module.css'
 import logo from '../../assets/logo.svg'
+import { Container } from '../Container'
 
-export function Header (){
+export function Header() {
     return (
-        <div>
+        <Container>
             <img src={logo} alt='logo' />
-        </div>
+        </Container>
     )
 }
