@@ -1,0 +1,84 @@
+.hero__banner {
+    padding: 2em 0em;
+}
+
+.hero__banner>h1 {
+    color: #000;
+    text-align: center;
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.hero__banner>h1>span {
+    color: #FFBD59;
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.subtitle__banner {
+    max-width: 834px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.hero__banner>.subtitle__banner>h3 {
+    color: #494949;
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.hero__banner>.subtitle__banner>h3>span {
+    color: #494949;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.search__bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 5em;
+}
+
+.search__bar>form {
+    width: 500px;
+    display: flex;
+}
+
+.search__bar>form>input {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    height: 40px;
+    border-radius: 3px;
+    max-width: 100%;
+    padding: 0px 8px;
+    flex: 1;
+}
+
+.search__bar>form>input::placeholder {
+    font-size: 12px;
+}
+
+.search__button {
+    border-radius: 7px;
+    background: #000;
+    display: inline-flex;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    font-size: 15px;
+    margin-left: 10px;
+}
