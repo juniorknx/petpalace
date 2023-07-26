@@ -30,6 +30,7 @@ button {
     padding: 7.5px 17px;
     align-items: flex-start;
     gap: 10px;
+    transition: 0.3s;
 }
 
 button>a {

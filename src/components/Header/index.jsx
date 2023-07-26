@@ -26,7 +26,7 @@ export function Header() {
                 <div>
                     <button>
                         <Link to="/login">
-                            Login
+                            Cadastre-se
                         </Link>
                     </button>
                 </div>
