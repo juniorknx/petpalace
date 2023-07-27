@@ -28,6 +28,21 @@ export function Home() {
                         </button>
                     </form>
                 </div>
+                <div className={styles.search__recents}>
+                    <span>Buscas recentes: <b>Husky, Golden, Caramelo</b></span>
+                </div>
+            </div>
+
+            <div className={styles.feed}>
+                <div className={styles.feed__title}>
+                    <h2>Animais para adoção <span>22</span></h2>
+                </div>
+
+                <div className={styles.feed__grid}>
+                    <div className={styles.feed_card}>
+                        item 1
+                    </div>
+                </div>
             </div>
         </Container>
     )

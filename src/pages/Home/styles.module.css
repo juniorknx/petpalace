@@ -82,3 +82,18 @@
     font-size: 15px;
     margin-left: 10px;
 }
+
+.search__recents {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.search__recents>span>b{
+    text-decoration: underline;
+    padding: 0px 2px;
+}
+
+.feed__grid {
+    
+}
