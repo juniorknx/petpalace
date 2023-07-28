@@ -4,9 +4,11 @@ import PugDraw from '../../assets/pugdrawer.png'
 import { Input } from '../../components/Input'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineEyeInvisible } from 'react-icons/ai'
 
 export function Register() {
-
+    const [visible, setVisible] = useState(false)
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -28,7 +30,7 @@ export function Register() {
         }))
     }
 
-    function handleSubmitForm(e){
+    function handleSubmitForm(e) {
         e.preventDefault()
         console.log(name, email)
     }
@@ -102,14 +104,17 @@ export function Register() {
                             onChange={onChange}
                         />
 
-                        <Input
-                            type="password"
-                            placeholder="Senha"
-                            style={{ width: '300px' }}
-                            id="password"
-                            value={password}
-                            onChange={onChange}
-                        />
+                        <div className={styles.password__input}>
+                            <Input
+                                type={visible === false ? 'password' : 'true'}
+                                placeholder="Senha"
+                                style={{ width: '300px' }}
+                                id="password"
+                                value={password}
+                                onChange={onChange}
+                            />
+                            {visible === false ?  <AiOutlineEye size={20} color='#000' onClick={() => setVisible(!visible)} /> : <AiOutlineEyeInvisible size={20} color='#000' onClick={() => setVisible(!visible)} />}
+                        </div>
 
                         <div>
                             <button type='submit' className={styles.register__button}>

@@ -42,6 +42,16 @@
     margin-top: 2rem;
 }
 
+.password__input {
+    display: flex;
+    align-items: center;
+}
+
+.password__input>svg {
+    position: relative;
+    margin-left: -27px;
+}
+
 .register__button {
     width: 100%;
     display: flex;
