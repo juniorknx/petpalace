@@ -1,5 +1,5 @@
 .register__container {
-    height: 100vh;
+    padding: 3em 0em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,4 +34,27 @@
 .page__title>img {
     margin-top: 15px;
     width: 110px;
+}
+
+.form__container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.register__button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00ac00;
+    color: #fff;
+    margin-top: 12px;
+}
+
+
+/* Responsive */ 
+
+@media (max-width: 768px) {
+    
 }
