@@ -1,6 +1,8 @@
 import styles from './styles.module.css'
 import { Container } from "../../components/Container";
 import { HiSearch } from "react-icons/hi";
+import { PiDogFill } from "react-icons/pi";
+import { CiLocationOn } from "react-icons/ci"
 
 export function Home() {
     return (
@@ -34,13 +36,105 @@ export function Home() {
             </div>
 
             <div className={styles.feed}>
-                <div className={styles.feed__title}>
+                <div>
                     <h2>Animais para adoção <span>22</span></h2>
                 </div>
 
                 <div className={styles.feed__grid}>
                     <div className={styles.feed_card}>
-                        item 1
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
+                    </div>
+
+                    <div className={styles.feed_card}>
+                        <img src='https://www.caesparaadocao.com.br/themes/caesparaadocao.com.br/uploads/caes/galeria/12082019091339_WhatsApp%20Image%202019-08-12%20at%2009.03.04(1).jpeg' alt='dog' />
+                        <div className={styles.card__title}>
+                            <PiDogFill size={17} color='#FFBD59' />
+                            <p>Bull Terrier</p>
+                        </div>
+                        <div className={styles.card__title}>
+                            <CiLocationOn size={17} color='#FFBD59' />
+                            <p>Porto Alegre - RS</p>
+                        </div>
                     </div>
                 </div>
             </div>
