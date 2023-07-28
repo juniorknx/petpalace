@@ -6,9 +6,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineEye } from 'react-icons/ai'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
+import { auth } from '../../services/firebaseConfig'
+import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
 
 export function Register() {
     const [visible, setVisible] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -30,9 +33,24 @@ export function Register() {
         }))
     }
 
-    function handleSubmitForm(e) {
+    async function handleSubmitForm(e) {
         e.preventDefault()
-        console.log(name, email)
+        const userCredential = createUserWithEmailAndPassword(auth, email, password)
+        await updateProfile((await userCredential).user, {
+            displayName: name,
+            email: email,
+            phone: phone,
+            whatsapp: whatsapp,
+            city: city,
+            uf: uf
+        }).then(() => {
+            console.log('Cadastrado com sucesso!!!')
+            navigate("/")
+        }).catch((error) => {
+            console.log('Err', error)
+        }).finally(() => {
+            setLoading(false)
+        })
     }
 
     return (
@@ -113,7 +131,7 @@ export function Register() {
                                 value={password}
                                 onChange={onChange}
                             />
-                            {visible === false ?  <AiOutlineEye size={20} color='#000' onClick={() => setVisible(!visible)} /> : <AiOutlineEyeInvisible size={20} color='#000' onClick={() => setVisible(!visible)} />}
+                            {visible === false ? <AiOutlineEye size={20} color='#000' onClick={() => setVisible(!visible)} /> : <AiOutlineEyeInvisible size={20} color='#000' onClick={() => setVisible(!visible)} />}
                         </div>
 
                         <div>
