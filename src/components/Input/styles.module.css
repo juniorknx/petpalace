@@ -1,3 +1,7 @@
+.form__group {
+    padding: 5px 0px;
+}
+
 .form__group > input {
     background: #F8F8F8;
     border: solid 1px #e3e3e3;
