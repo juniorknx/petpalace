@@ -106,7 +106,7 @@ export function Register() {
 
                         <div className={styles.password__input}>
                             <Input
-                                type={visible === false ? 'password' : 'true'}
+                                type={visible === false ? 'password' : 'text'}
                                 placeholder="Senha"
                                 style={{ width: '300px' }}
                                 id="password"
