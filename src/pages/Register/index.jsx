@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Container } from '../../components/Container'
 import styles from './styles.module.css'
@@ -39,6 +39,14 @@ export function Register() {
         }))
     }
 
+    useEffect(() => {
+        async function handleLogout() {
+            await signOut(auth)
+        }
+
+        handleLogout()
+    }, [])
+
     console.log('Auth ===>', auth.currentUser?.uid)
 
     async function handleSubmitForm(e) {
@@ -59,7 +67,7 @@ export function Register() {
         await setDoc(doc(db, 'users', auth.currentUser?.uid), formDataCopy)
             .then(() => {
                 console.log('Cadastrado com sucesso!!!')
-                navigate("/")
+                navigate("/dashboard")
             }).catch((error) => {
                 console.log('Err', error)
             }).finally(() => {
