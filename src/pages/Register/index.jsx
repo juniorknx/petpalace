@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { AuthContext } from '../../contexts/AuthContext'
 import { Container } from '../../components/Container'
 import styles from './styles.module.css'
 import PugDraw from '../../assets/pugdrawer.png'
@@ -8,8 +10,12 @@ import { AiOutlineEye } from 'react-icons/ai'
 import { AiOutlineEyeInvisible } from 'react-icons/ai'
 import { auth } from '../../services/firebaseConfig'
 import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { setDoc, doc } from 'firebase/firestore'
+import { db } from '../../services/firebaseConfig'
 
 export function Register() {
+    const { handleInfoUser } = useContext(AuthContext)
+
     const [visible, setVisible] = useState(false)
     const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState({
@@ -33,24 +39,32 @@ export function Register() {
         }))
     }
 
+    console.log('Auth ===>', auth.currentUser?.uid)
+
     async function handleSubmitForm(e) {
         e.preventDefault()
         const userCredential = createUserWithEmailAndPassword(auth, email, password)
         await updateProfile((await userCredential).user, {
-            displayName: name,
-            email: email,
-            phone: phone,
-            whatsapp: whatsapp,
-            city: city,
-            uf: uf
-        }).then(() => {
-            console.log('Cadastrado com sucesso!!!')
-            navigate("/")
-        }).catch((error) => {
-            console.log('Err', error)
-        }).finally(() => {
-            setLoading(false)
+            displayName: name
         })
+
+        handleInfoUser({
+            name: name,
+            email: email,
+            uid: userCredential.user?.uid
+        })
+        //Grava na base as infos do usuário
+        const formDataCopy = { ...formData }
+        delete formDataCopy.password
+        await setDoc(doc(db, 'users', auth.currentUser?.uid), formDataCopy)
+            .then(() => {
+                console.log('Cadastrado com sucesso!!!')
+                navigate("/")
+            }).catch((error) => {
+                console.log('Err', error)
+            }).finally(() => {
+                setLoading(false)
+            })
     }
 
     return (
