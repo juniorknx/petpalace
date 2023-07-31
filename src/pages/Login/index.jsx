@@ -64,6 +64,7 @@ export function Login() {
                             id="email"
                             value={email}
                             onChange={onChange}
+                            required
                         />
 
                         <Input
@@ -73,6 +74,7 @@ export function Login() {
                             id="password"
                             value={password}
                             onChange={onChange}
+                            required
                         />
 
                         <div>
