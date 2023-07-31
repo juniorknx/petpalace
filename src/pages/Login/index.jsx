@@ -14,7 +14,8 @@ export function Login() {
         email: '',
         password: ''
     })
-    const [visible, setVisivle] = useState(false)
+    const [visible, setVisible] = useState(false)
+    const [loading, setLoading] = useState(false)
     const { email, password } = formData
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export function Login() {
 
     function handleLogin(e) {
         e.preventDefault()
-
+        setLoading(true)
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 navigate("/dashboard")
@@ -42,6 +43,7 @@ export function Login() {
                 console.log(err)
             }).finally(() => {
                 console.log('Log in succeced!')
+                setLoading(false)
             })
     }
 
@@ -75,7 +77,7 @@ export function Login() {
 
                         <div>
                             <button type='submit' className={styles.login__button}>
-                                Login
+                                {loading === true ? 'Entrando...' : 'Login'}
                             </button>
                         </div>
 
