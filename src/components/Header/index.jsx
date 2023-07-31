@@ -25,8 +25,8 @@ export function Header() {
 
                 <div>
                     <button>
-                        <Link to="/cadastre-se">
-                            Cadastre-se
+                        <Link to="/login">
+                            Login
                         </Link>
                     </button>
                 </div>
