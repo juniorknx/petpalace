@@ -12,7 +12,7 @@ import { auth } from '../../services/firebaseConfig'
 import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
 import { setDoc, doc } from 'firebase/firestore'
 import { db } from '../../services/firebaseConfig'
-
+ 
 export function Register() {
     const { handleInfoUser } = useContext(AuthContext)
 
