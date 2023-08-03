@@ -1,0 +1,35 @@
+.dashboard__header {
+    background-color: #f6f6f6c7;
+    padding: 9px;
+    border-radius: 6px;
+    border: solid 1px #ebebeb;
+    margin-top: 1.5em;
+}
+
+header>nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header>nav>div a {
+    color: #494949;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    margin: 0px 20px;
+}
+
+.sign__out>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #494949;
+    gap: 5px;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+}
