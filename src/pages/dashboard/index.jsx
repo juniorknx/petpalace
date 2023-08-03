@@ -1,7 +1,15 @@
+import styles from './styles.module.css'
+import { Container } from '../../components/Container'
+import { HeaderDashboard } from '../../components/DashBoardHeader'
+
 export function Dashboard() {
     return (
-        <div>
-            <h1>This is the dashboard page</h1>
-        </div>
+        <Container>
+            <HeaderDashboard />
+
+            <div className=''>
+                { /* Pets Cadastrados */}
+            </div>
+        </Container>
     )
 }
