@@ -5,6 +5,7 @@ import { Register } from './pages/Register'
 import { Dashboard } from './pages/dashboard'
 import { PrivateRoute } from './routes/Private'
 import { Login } from './pages/Login'
+import { CadastrarPet } from './pages/dashboard/new'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <PrivateRoute><Dashboard /></PrivateRoute>
+      },
+      {
+        path: "/dashboard/cadastrar",
+        element: <PrivateRoute><CadastrarPet /></PrivateRoute>
       },
       {
         path: "/login",
