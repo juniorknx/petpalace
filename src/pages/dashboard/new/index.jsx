@@ -2,10 +2,23 @@ import { Container } from '../../../components/Container'
 import { HeaderDashboard } from '../../../components/DashBoardHeader'
 import styles from './styles.module.css'
 import { Input } from '../../../components/Input'
+import { FiTrash } from 'react-icons/fi'
 import { useState } from 'react'
 import PugDraw from '../../../assets/pugdrawer.png'
+import { useContext } from 'react'
+import { AuthContext } from '../../../contexts/AuthContext'
+import { v4 as uuidV4 } from 'uuid'
+import { storage, db } from '../../../services/firebaseConfig'
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject
+} from 'firebase/storage'
 
 export function CadastrarPet() {
+    const { user } = useContext(AuthContext)
+    const [dogImages, setDogImages] = useState([])
     const [formData, setFormData] = useState({
         nome: '',
         raca: '',
@@ -31,9 +44,65 @@ export function CadastrarPet() {
         }))
     }
 
+    {/*Upload files */ }
+    async function handleFile(e) {
+        if (e.target.files && e.target.files[0]) {
+            const image = e.target.files[0]
+            if (image.type === 'image/jpeg' || image.type === 'image/png') {
+                await handleUpload(image)
+            } else {
+                alert('Envie uma imagem jpeg ou png')
+                return
+            }
+        }
+    }
+
+    async function handleUpload(images) {
+        if (!user.uid) {
+            return
+        }
+
+        if (dogImages.length >= 3) {
+            alert('Limite máximo de 3 imagens')
+            return
+        }
+
+        const currentUid = user?.uid
+        const uidImage = uuidV4();
+        const uploadRef = ref(storage, `images/${currentUid}/${uidImage}`)
+        uploadBytes(uploadRef, images)
+            .then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((downloadUrl) => {
+                    console.log(downloadUrl)
+                    const imageItem = {
+                        name: uidImage,
+                        uid: currentUid,
+                        previewUrl: URL.createObjectURL(images),
+                        url: downloadUrl
+                    }
+
+                    setDogImages((images) => [...images, imageItem])
+                    console.log('iMAGES ADDED!')
+                })
+            })
+    }
+
+    console.log(dogImages.map(images => images))
+
     function handleForm(e) {
         e.preventDefault()
         console.log(formData)
+    }
+
+    async function handleDeleteImage(item) {
+        const imagePath = `images/${item.uid}/${item.name}`
+        const imageRef = ref(storage, imagePath)
+        try {
+            await deleteObject(imageRef)
+            setDogImages(dogImages.filter(dog => dog.previewUrl !== dog.previewUrl))
+        } catch (err) {
+            console.log(err, 'Erro ao deletar imagem')
+        }
     }
 
     return (
@@ -125,9 +194,20 @@ export function CadastrarPet() {
                             accept="image/*"
                             id="photos"
                             value={photos}
-                            onChange={() => { }}
+                            onChange={handleFile}
                             style={{ width: '340px' }}
+                            mmultiple
                         />
+                        <div className={styles.imagesUploaded}>
+                            {dogImages.map(item => (
+                                <div key={item?.name}>
+                                    <img src={item?.previewUrl} alt='Dog Image' />
+                                    <button onClick={() => handleDeleteImage(item)}>
+                                        <FiTrash size={28} color="#000" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
 
                         <textarea name="description" id="description" value={description} onChange={onChange} cols="47" rows="5"></textarea>
                     </div>
