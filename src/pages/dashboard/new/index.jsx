@@ -15,6 +15,7 @@ import {
     getDownloadURL,
     deleteObject
 } from 'firebase/storage'
+import { addDoc, collection } from 'firebase/firestore'
 
 export function CadastrarPet() {
     const { user } = useContext(AuthContext)
@@ -28,14 +29,13 @@ export function CadastrarPet() {
         cidade: '',
         estado: '',
         whatsapp: '',
-        email: '',
         description: '',
         owner: '',
-        available: true,
+        available: null,
         photos: []
     })
 
-    const { raca, cor, peso, idade, nome, cidade, estado, owner, photos, available, description, whatsapp, email } = formData
+    const { raca, cor, peso, idade, nome, cidade, estado, owner, photos, available, description, whatsapp } = formData
 
     function onChange(e) {
         setFormData((prevState) => ({
@@ -87,12 +87,6 @@ export function CadastrarPet() {
             })
     }
 
-    
-    function handleForm(e) {
-        e.preventDefault()
-        console.log(formData)
-    }
-
     async function handleDeleteImage(item) {
         const imagePath = `images/${item.uid}/${item.name}`
         const imageRef = ref(storage, imagePath)
@@ -102,6 +96,54 @@ export function CadastrarPet() {
         } catch (err) {
             console.log(err, 'Erro ao deletar imagem')
         }
+    }
+
+    function handleForm(e) {
+        e.preventDefault()
+
+        const dogListImage = dogImages.map((dog) => {
+            return {
+                uid: dog.uid,
+                name: dog.name,
+                url: dog.url
+            }
+        })
+
+        addDoc(collection(db, 'pets'), {
+            nome: nome?.toUpperCase(),
+            raca,
+            cor,
+            idade,
+            peso,
+            cidade,
+            estado,
+            whatsapp,
+            images: dogListImage,
+            description,
+            owner: user?.name,
+            uid: user?.uid,
+            email: user?.email,
+            created: new Date(),
+            available: available
+        }).then(() => {
+            console.log('Data addedd!')
+            setFormData({
+                nome: '',
+                raca: '',
+                cor: '',
+                idade: '',
+                peso: '',
+                cidade: '',
+                estado: '',
+                whatsapp: '',
+                description: '',
+                photos: [],
+                available: true // or set it to the initial value for the 'available' field
+            });
+            setDogImages([])
+        }).catch((err) => {
+            console.log(err, 'DATA NOT ADDED')
+        })
     }
 
     return (
