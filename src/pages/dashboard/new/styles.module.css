@@ -27,3 +27,22 @@
     flex-direction: column;
     align-items: center;
 }
+
+.imagesUploaded {
+    display: flex;
+    width: 357px;
+    align-items: center;
+    gap: 12px;
+}
+
+.imagesUploaded>div>img{
+    width: 110px;
+}
+
+.imagesUploaded>div>button {
+    position: absolute;
+    bottom: 74px;
+    background-color: #ffffffd4;
+    padding: 4px;
+    border-radius: 14px;
+}

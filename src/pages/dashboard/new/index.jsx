@@ -203,7 +203,7 @@ export function CadastrarPet() {
                                 <div key={item?.name}>
                                     <img src={item?.previewUrl} alt='Dog Image' />
                                     <button onClick={() => handleDeleteImage(item)}>
-                                        <FiTrash size={28} color="#000" />
+                                        <FiTrash size={21} color="#000" />
                                     </button>
                                 </div>
                             ))}
