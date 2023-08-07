@@ -28,6 +28,21 @@
     align-items: center;
 }
 
+.form__cadastro__container>form>div>textarea {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    outline: none;
+    width: 100%;
+    margin: 5px 0px;
+    border-radius: 3px;
+}
+
+.form__cadastro__container>form>button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .imagesUploaded {
     display: flex;
     width: 357px;

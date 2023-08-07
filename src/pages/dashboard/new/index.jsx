@@ -250,10 +250,10 @@ export function CadastrarPet() {
                             ))}
                         </div>
 
-                        <textarea name="description" id="description" value={description} onChange={onChange} cols="47" rows="5"></textarea>
+                        <textarea name="description" id="description" value={description} onChange={onChange} rows="4"></textarea>
                     </div>
                     <button type='submit'>
-                        enviar
+                        Enviar
                     </button>
                 </form>
             </div>
