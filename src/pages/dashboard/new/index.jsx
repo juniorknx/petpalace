@@ -99,7 +99,7 @@ export function CadastrarPet() {
         const imageRef = ref(storage, imagePath)
         try {
             await deleteObject(imageRef)
-            setDogImages(dogImages.filter(dog => dog.previewUrl !== dog.previewUrl))
+            setDogImages(dogImages.filter((dog) => dog.previewUrl !== item.previewUrl))
         } catch (err) {
             console.log(err, 'Erro ao deletar imagem')
         }
