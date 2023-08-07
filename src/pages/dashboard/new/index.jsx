@@ -87,8 +87,7 @@ export function CadastrarPet() {
             })
     }
 
-    console.log(dogImages.map(images => images))
-
+    
     function handleForm(e) {
         e.preventDefault()
         console.log(formData)

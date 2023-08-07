@@ -35,8 +35,8 @@
     gap: 12px;
 }
 
-.imagesUploaded>div>img{
-    width: 110px;
+.imagesUploaded>div>img {
+    max-width: 110px;
 }
 
 .imagesUploaded>div>button {
@@ -45,4 +45,13 @@
     background-color: #ffffffd4;
     padding: 4px;
     border-radius: 14px;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    padding: 0.5em;
+    border: solid 1px rgb(179, 179, 179);
+    border-radius: 4px;
+    margin-top: 5px;
+    cursor: pointer;
 }
