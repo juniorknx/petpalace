@@ -1,4 +1,5 @@
 import { Container } from '../../../components/Container'
+import { Loading } from '../../../components/Loader'
 import { HeaderDashboard } from '../../../components/DashBoardHeader'
 import styles from './styles.module.css'
 import { Input } from '../../../components/Input'
@@ -20,6 +21,8 @@ import { addDoc, collection } from 'firebase/firestore'
 export function CadastrarPet() {
     const { user } = useContext(AuthContext)
     const [dogImages, setDogImages] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [uploadLoading, setUploadLoading] = useState(false)
     const [formData, setFormData] = useState({
         nome: '',
         raca: '',
@@ -58,6 +61,7 @@ export function CadastrarPet() {
     }
 
     async function handleUpload(images) {
+        setUploadLoading(true)
         if (!user.uid) {
             return
         }
@@ -84,6 +88,10 @@ export function CadastrarPet() {
                     setDogImages((images) => [...images, imageItem])
                     console.log('iMAGES ADDED!')
                 })
+            }).catch((err) => {
+                console.log(err, '<=== erro ao adicionar imagem')
+            }).finally(() => {
+                setUploadLoading(false)
             })
     }
 
@@ -100,7 +108,7 @@ export function CadastrarPet() {
 
     function handleForm(e) {
         e.preventDefault()
-
+        setLoading(true)
         const dogListImage = dogImages.map((dog) => {
             return {
                 uid: dog.uid,
@@ -143,6 +151,8 @@ export function CadastrarPet() {
             setDogImages([])
         }).catch((err) => {
             console.log(err, 'DATA NOT ADDED')
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
@@ -165,6 +175,7 @@ export function CadastrarPet() {
                             value={nome}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -174,6 +185,7 @@ export function CadastrarPet() {
                             value={raca}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -183,6 +195,7 @@ export function CadastrarPet() {
                             value={cor}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -192,6 +205,7 @@ export function CadastrarPet() {
                             value={idade}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -210,6 +224,7 @@ export function CadastrarPet() {
                             value={cidade}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -219,6 +234,7 @@ export function CadastrarPet() {
                             value={estado}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -228,6 +244,7 @@ export function CadastrarPet() {
                             value={whatsapp}
                             onChange={onChange}
                             style={{ width: '340px' }}
+                            required
                         />
 
                         <Input
@@ -240,20 +257,22 @@ export function CadastrarPet() {
                             mmultiple
                         />
                         <div className={styles.imagesUploaded}>
-                            {dogImages.map(item => (
-                                <div key={item?.name}>
-                                    <img src={item?.previewUrl} alt='Dog Image' />
-                                    <button onClick={() => handleDeleteImage(item)}>
-                                        <FiTrash size={21} color="#000" />
-                                    </button>
-                                </div>
-                            ))}
+                            {uploadLoading === true ? <Loading size={'small'} /> : (
+                                dogImages.map(item => (
+                                    <div key={item?.name}>
+                                        <img src={item?.previewUrl} alt='Dog Image' />
+                                        <button onClick={() => handleDeleteImage(item)}>
+                                            <FiTrash size={21} color="#000" />
+                                        </button>
+                                    </div>
+                                ))
+                            )}
                         </div>
 
-                        <textarea name="description" id="description" value={description} onChange={onChange} rows="4"></textarea>
+                        <textarea name="description" id="description" value={description} onChange={onChange} rows="4" required></textarea>
                     </div>
                     <button type='submit'>
-                        Enviar
+                        {loading ? <Loading size='small' /> : 'Enviar'}
                     </button>
                 </form>
             </div>
