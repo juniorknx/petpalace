@@ -1,0 +1,72 @@
+.header__cadastro_pet {
+    margin: 2em 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header__cadastro_pet>img {
+    margin-top: 15px;
+    width: 110px;
+}
+
+.header__cadastro_pet>h2 {
+    color: #000;
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.form__cadastro__container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__cadastro__container>form>div>textarea {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    outline: none;
+    width: 100%;
+    margin: 5px 0px;
+    border-radius: 3px;
+}
+
+.form__cadastro__container>form>button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.imagesUploaded {
+    display: flex;
+    width: 357px;
+    align-items: center;
+    gap: 12px;
+}
+
+.imagesUploaded>div>img {
+    max-width: 110px;
+}
+
+.imagesUploaded>div>button {
+    position: absolute;
+    bottom: 74px;
+    background-color: #ffffffd4;
+    padding: 4px;
+    border-radius: 14px;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    padding: 0.5em;
+    border: solid 1px rgb(179, 179, 179);
+    border-radius: 4px;
+    margin-top: 5px;
+    cursor: pointer;
+}
