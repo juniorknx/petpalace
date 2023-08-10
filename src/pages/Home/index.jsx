@@ -4,45 +4,87 @@ import { HiSearch } from "react-icons/hi";
 import { PiDogFill } from "react-icons/pi";
 import { CiLocationOn } from "react-icons/ci"
 import { db } from "../../services/firebaseConfig"
-import { collection, getDocs, orderBy, query } from "firebase/firestore"
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore"
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loader'
 
 export function Home() {
     const [pets, setPets] = useState([])
     const [loading, setLoading] = useState(true)
+    const [input, setInput] = useState('')
+    const [noResultsFound, setNoResultsFound] = useState(false);
 
     useEffect(() => {
-        async function loadPets() {
-            const dogRef = collection(db, "pets")
-            const queryRef = query(dogRef, orderBy("created", "desc"))
-
-            getDocs(queryRef)
-                .then((snapshot) => {
-                    let petList = []
-                    snapshot.forEach(doc => {
-                        petList.push({
-                            id: doc.id,
-                            nome: doc.data().nome,
-                            cor: doc.data().cor,
-                            peso: doc.data().peso,
-                            raca: doc.data().raca,
-                            idade: doc.data().idade,
-                            images: doc.data().images,
-                            descricao: doc.data().description,
-                            estado: doc.data().estado,
-                            cidade: doc.data().cidade,
-                            disponivel: doc.data().available,
-                            criado: doc.data().created
-                        })
-                    })
-                    setPets(petList)
-                    setLoading(false)
-                })
-        }
         loadPets()
     }, [])
 
+    async function loadPets() {
+        const dogRef = collection(db, "pets")
+        const queryRef = query(dogRef, orderBy("created", "desc"))
+
+        getDocs(queryRef)
+            .then((snapshot) => {
+                let petList = []
+                snapshot.forEach(doc => {
+                    petList.push({
+                        id: doc.id,
+                        nome: doc.data().nome,
+                        cor: doc.data().cor,
+                        peso: doc.data().peso,
+                        raca: doc.data().raca,
+                        idade: doc.data().idade,
+                        images: doc.data().images,
+                        descricao: doc.data().description,
+                        estado: doc.data().estado,
+                        cidade: doc.data().cidade,
+                        disponivel: doc.data().available,
+                        criado: doc.data().created
+                    })
+                })
+                setPets(petList)
+                setLoading(false)
+                setNoResultsFound(false);
+            })
+    }
+
+    async function handleSearchInput(e) {
+        e.preventDefault()
+
+        if (input === '') {
+            loadPets()
+            return
+        }
+
+        setPets([])
+
+        const q = query(collection(db, "pets"), where("nome", ">=", input.toUpperCase()), where("nome", "<=", input.toUpperCase() + "\uf8ff"))
+
+        const querySnapshot = await getDocs(q)
+
+        let dogList = []
+        querySnapshot.forEach((doc) => {
+            dogList.push({
+                id: doc.id,
+                nome: doc.data().nome,
+                cor: doc.data().cor,
+                peso: doc.data().peso,
+                raca: doc.data().raca,
+                idade: doc.data().idade,
+                images: doc.data().images,
+                descricao: doc.data().description,
+                estado: doc.data().estado,
+                cidade: doc.data().cidade,
+                disponivel: doc.data().available,
+                criado: doc.data().created
+            })
+        })
+
+        if (dogList.length === 0) {
+            setNoResultsFound(true);
+        }
+        setPets(dogList)
+    }
+    console.log('pet search result ====>', pets.length)
     return (
         <Container>
             <div className={styles.hero__banner}>
@@ -56,10 +98,12 @@ export function Home() {
                 </div>
 
                 <div className={styles.search__bar}>
-                    <form>
+                    <form onSubmit={handleSearchInput}>
                         <input
                             type='text'
                             placeholder='Pesquisar doguinhos, caramelos e gatos...'
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
                         />
 
                         <button type='submit' className={styles.search__button}>
@@ -85,7 +129,7 @@ export function Home() {
                         pets.map((item) => {
                             return (
                                 <div key={item.id} className={styles.feed_card}>
-                                    <img src={item.images[0].url} alt={item.raca} loading='lazy'/>
+                                    <img src={item.images[0].url} alt={item.raca} loading='lazy' />
                                     <div className={styles.card__title}>
                                         <PiDogFill size={17} color='#FFBD59' />
                                         <p>{item.nome}</p>
@@ -98,6 +142,7 @@ export function Home() {
                             )
                         })
                     )}
+                    {noResultsFound && <p>Nenhum resultado encontrado.</p>}
                 </div>
             </div>
         </Container>
