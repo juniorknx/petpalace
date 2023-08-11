@@ -57,7 +57,7 @@ export function Home() {
 
         setPets([])
 
-        const q = query(collection(db, "pets"), where("nome", ">=", input.toUpperCase()), where("nome", "<=", input.toUpperCase() + "\uf8ff"))
+        const q = query(collection(db, "pets"), where("raca", ">=", input.toUpperCase()), where("raca", "<=", input.toUpperCase() + "\uf8ff"))
 
         const querySnapshot = await getDocs(q)
 

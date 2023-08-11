@@ -119,7 +119,7 @@ export function CadastrarPet() {
 
         addDoc(collection(db, 'pets'), {
             nome: nome?.toUpperCase(),
-            raca,
+            raca: raca.toUpperCase(),
             cor,
             idade,
             peso,
