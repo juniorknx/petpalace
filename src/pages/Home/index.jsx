@@ -57,7 +57,10 @@ export function Home() {
 
         setPets([])
 
-        const q = query(collection(db, "pets"), where("raca", ">=", input.toUpperCase()), where("raca", "<=", input.toUpperCase() + "\uf8ff"))
+        const q = query(collection(db, "pets"),
+            where("raca", ">=", input.toUpperCase()),
+            where("raca", "<=", input.toUpperCase() + "\uf8ff")
+        );
 
         const querySnapshot = await getDocs(q)
 
@@ -84,7 +87,7 @@ export function Home() {
         }
         setPets(dogList)
     }
-    console.log('pet search result ====>', pets.length)
+
     return (
         <Container>
             <div className={styles.hero__banner}>
