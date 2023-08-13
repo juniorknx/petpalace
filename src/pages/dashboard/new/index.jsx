@@ -119,7 +119,7 @@ export function CadastrarPet() {
 
         addDoc(collection(db, 'pets'), {
             nome: nome?.toUpperCase(),
-            raca,
+            raca: raca.toUpperCase(),
             cor,
             idade,
             peso,
@@ -254,7 +254,7 @@ export function CadastrarPet() {
                             value={photos}
                             onChange={handleFile}
                             style={{ width: '340px' }}
-                            mmultiple
+                            mmultiple="true"
                         />
                         <div className={styles.imagesUploaded}>
                             {uploadLoading === true ? <Loading size={'small'} /> : (
