@@ -4,7 +4,7 @@ import { HiSearch } from "react-icons/hi";
 import { PiDogFill } from "react-icons/pi";
 import { CiLocationOn } from "react-icons/ci"
 import { db } from "../../services/firebaseConfig"
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore"
+import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loader'
 
@@ -13,9 +13,14 @@ export function Home() {
     const [loading, setLoading] = useState(true)
     const [input, setInput] = useState('')
     const [noResultsFound, setNoResultsFound] = useState(false);
+    const [recentSearch, setRecentSearch] = useState([])
 
     useEffect(() => {
         loadPets()
+    }, [])
+
+    useEffect(() => {
+        loadRecents()
     }, [])
 
     async function loadPets() {
@@ -88,6 +93,39 @@ export function Home() {
         setPets(dogList)
     }
 
+    {/* Add recent searches */ }
+    async function handleRecentSearch() {
+        const docRef = addDoc(collection(db, "recent"), {
+            recent: input
+        }).then(() => {
+            console.log('Documento added', docRef.id)
+        }).catch((err) => {
+            console.log('Erro ao inserir busca recente', err)
+        })
+    }
+
+    async function loadRecents() {
+        const recentRef = collection(db, "recent");
+        const q = query(recentRef, orderBy("recent", "desc"), limit(4));
+    
+        try {
+            const querySnap = await getDocs(q);
+            const recentList = [];
+    
+            querySnap.forEach(doc => {
+                recentList.push({
+                    id: doc.id,
+                    recentes: doc.data().recent
+                });
+            });
+    
+            setLoading(false);
+            setRecentSearch(recentList)
+        } catch (error) {
+            console.error("Error fetching recent documents:", error);
+        }
+    }
+
     return (
         <Container>
             <div className={styles.hero__banner}>
@@ -109,14 +147,24 @@ export function Home() {
                             onChange={(e) => setInput(e.target.value)}
                         />
 
-                        <button type='submit' className={styles.search__button}>
+                        <button type='submit' className={styles.search__button} onClick={handleRecentSearch}>
                             <HiSearch size={23} color='#fff' />
                             Buscar
                         </button>
                     </form>
                 </div>
                 <div className={styles.search__recents}>
-                    <span>Buscas recentes: <b>Husky, Golden, Caramelo</b></span>
+                    <span>Buscas recentes:{loading ? (
+                        <div></div>
+                    ) : (
+                        recentSearch.map(item => {
+                            return (
+                                <div key={item.id}>
+                                    <b className={styles.recentItens}>{item.recentes}</b>
+                                </div>
+                            )
+                        })
+                    )}</span>
                 </div>
             </div>
 
