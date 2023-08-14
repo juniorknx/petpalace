@@ -129,6 +129,7 @@
     max-width: 230px;
     background: #f8f8f8e3;
     padding: 10px;
+    cursor: pointer;
 }
 
 .feed_card>img {

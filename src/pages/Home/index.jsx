@@ -7,6 +7,7 @@ import { db } from "../../services/firebaseConfig"
 import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loader'
+import { Link } from 'react-router-dom';
 
 export function Home() {
     const [pets, setPets] = useState([])
@@ -107,18 +108,18 @@ export function Home() {
     async function loadRecents() {
         const recentRef = collection(db, "recent");
         const q = query(recentRef, orderBy("recent", "desc"), limit(4));
-    
+
         try {
             const querySnap = await getDocs(q);
             const recentList = [];
-    
+
             querySnap.forEach(doc => {
                 recentList.push({
                     id: doc.id,
                     recentes: doc.data().recent
                 });
             });
-    
+
             setLoading(false);
             setRecentSearch(recentList)
         } catch (error) {
@@ -179,17 +180,19 @@ export function Home() {
                     ) : (
                         pets.map((item) => {
                             return (
-                                <div key={item.id} className={styles.feed_card}>
-                                    <img src={item.images[0].url} alt={item.raca} loading='lazy' />
-                                    <div className={styles.card__title}>
-                                        <PiDogFill size={17} color='#FFBD59' />
-                                        <p>{item.nome}</p>
+                                <Link key={item.id} to={`/dogs/${item.id}`} style={{ textDecoration: 'none' }}>
+                                    <div key={item.id} className={styles.feed_card}>
+                                        <img src={item.images[0].url} alt={item.raca} loading='lazy' />
+                                        <div className={styles.card__title}>
+                                            <PiDogFill size={17} color='#FFBD59' />
+                                            <p>{item.nome}</p>
+                                        </div>
+                                        <div className={styles.card__title}>
+                                            <CiLocationOn size={17} color='#FFBD59' />
+                                            <p>{item.cidade} - {item.estado}</p>
+                                        </div>
                                     </div>
-                                    <div className={styles.card__title}>
-                                        <CiLocationOn size={17} color='#FFBD59' />
-                                        <p>{item.cidade} - {item.estado}</p>
-                                    </div>
-                                </div>
+                                </Link>
                             )
                         })
                     )}
