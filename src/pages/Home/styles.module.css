@@ -86,12 +86,19 @@
 .search__recents {
     text-align: center;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 12px; 
 }
 
-.search__recents>span>b {
-    text-decoration: underline;
+.search__recents>span {
     padding: 0px 2px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
+.recentItens {
+    text-decoration: underline;
+    text-transform: capitalize;
 }
 
 .feed>div>h2 {
