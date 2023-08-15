@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import { Container } from "../../components/Container";
 import { HiSearch } from "react-icons/hi";
-import { PiDogFill } from "react-icons/pi";
+import { MdOutlinePets } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci"
 import { db } from "../../services/firebaseConfig"
 import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
@@ -184,7 +184,7 @@ export function Home() {
                                     <div key={item.id} className={styles.feed_card}>
                                         <img src={item.images[0].url} alt={item.raca} loading='lazy' />
                                         <div className={styles.card__title}>
-                                            <PiDogFill size={17} color='#FFBD59' />
+                                            <MdOutlinePets size={17} color='#FFBD59' />
                                             <p>{item.nome}</p>
                                         </div>
                                         <div className={styles.card__title}>
