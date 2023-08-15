@@ -249,7 +249,7 @@ export function CadastrarPet() {
 
                         <Input
                             type="file"
-                            accept="image/*"
+                            accept="image/*;capture=camera"
                             id="photos"
                             value={photos}
                             onChange={handleFile}
