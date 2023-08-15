@@ -6,6 +6,7 @@ import { Dashboard } from './pages/dashboard'
 import { PrivateRoute } from './routes/Private'
 import { Login } from './pages/Login'
 import { CadastrarPet } from './pages/dashboard/new'
+import { PetDetail } from './pages/PetDetail'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/pet/:id",
+        element: <PetDetail />
       }
     ]
   }

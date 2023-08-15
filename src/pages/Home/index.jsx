@@ -180,7 +180,7 @@ export function Home() {
                     ) : (
                         pets.map((item) => {
                             return (
-                                <Link key={item.id} to={`/dogs/${item.id}`} style={{ textDecoration: 'none' }}>
+                                <Link key={item.id} to={`/pet/${item.id}`} style={{ textDecoration: 'none' }}>
                                     <div key={item.id} className={styles.feed_card}>
                                         <img src={item.images[0].url} alt={item.raca} loading='lazy' />
                                         <div className={styles.card__title}>
