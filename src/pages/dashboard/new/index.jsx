@@ -34,7 +34,7 @@ export function CadastrarPet() {
         whatsapp: '',
         description: '',
         owner: '',
-        available: null,
+        available: true,
         photos: []
     })
 
