@@ -182,6 +182,7 @@ export function Home() {
                             return (
                                 <Link key={item.id} to={`/pet/${item.id}`} style={{ textDecoration: 'none' }}>
                                     <div key={item.id} className={styles.feed_card}>
+                                        <span className={item.disponivel ? styles.adopt_green : styles.adopt_red}>{item.disponivel ? 'Disponível para adoção' : 'Felizmente esse peludo foi adotado!'}</span>
                                         <img src={item.images[0].url} alt={item.raca} loading='lazy' />
                                         <div className={styles.card__title}>
                                             <MdOutlinePets size={17} color='#FFBD59' />

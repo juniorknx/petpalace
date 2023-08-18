@@ -134,6 +134,7 @@
 
 .feed_card>img {
     width: 100%;
+    max-height: 225px;
 }
 
 .card__title {
@@ -146,6 +147,28 @@
     font-weight: 700;
     line-height: normal;
     margin-top: 6px;
+}
+
+.adopt_green {
+    color: #fff;
+    background: green;
+    font-size: 12px;
+    padding: 2px 1px;
+    border-radius: 2px;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+}
+
+.adopt_red {
+    color: #000;
+    background: #FFBD59;
+    font-size: 12px;
+    padding: 2px 1px;
+    border-radius: 2px;
+    display: block;
+    text-align: center;
+    font-weight: 700;
 }
 
 
