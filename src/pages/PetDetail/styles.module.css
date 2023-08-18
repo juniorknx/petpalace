@@ -25,7 +25,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 20px;
 }
 
 .pet__profile>div>dl>dd {
@@ -37,6 +37,8 @@
 }
 
 .slider__container {
+    max-width: 100%;
+    width: 300px;
     flex: 1;
 }
 
@@ -59,10 +61,6 @@
 .profile_ {
     display: flex;
     gap: 10px;
-}
-
-.slider__container {
-    max-width: 100%;
 }
 
 .imageSlider {
