@@ -3,7 +3,7 @@ import styles from './styles.module.css'
 import { Container } from '../../components/Container'
 import { HeaderDashboard } from '../../components/DashBoardHeader'
 import { db, storage } from '../../services/firebaseConfig'
-import { doc, collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
+import { doc, collection, deleteDoc, getDocs, query, where, updateDoc } from 'firebase/firestore'
 import { deleteObject } from 'firebase/storage'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Loading } from '../../components/Loader'
@@ -11,11 +11,13 @@ import { MdOutlinePets } from "react-icons/md";
 import { CiLocationOn } from "react-icons/ci"
 import { ref } from 'firebase/storage'
 import { BsFillTrash3Fill } from 'react-icons/bs'
+import { SlHeart } from 'react-icons/sl'
 
 export function Dashboard() {
     const { user } = useContext(AuthContext)
     const [anuncios, setAnuncios] = useState([])
     const [loading, setLoading] = useState(true)
+    const [adopted, setAdopted] = useState(true)
 
     useEffect(() => {
         async function loadAnuncios() {
@@ -30,7 +32,8 @@ export function Dashboard() {
                         nome: doc.data().nome,
                         images: doc.data().images,
                         cidade: doc.data().cidade,
-                        estado: doc.data().estado
+                        estado: doc.data().estado,
+                        disponivel: doc.data().available
                     })
                 })
                 setAnuncios(pets)
@@ -42,7 +45,7 @@ export function Dashboard() {
         }
 
         loadAnuncios()
-    }, [])
+    }, [anuncios])
 
     async function handleRemove(pet) {
         const docRef = doc(db, "pets", pet.id);
@@ -62,6 +65,18 @@ export function Dashboard() {
 
         const updatedAnuncios = anuncios.filter(filteredPet => filteredPet.id !== pet.id);
         setAnuncios(updatedAnuncios);
+    }
+
+    async function handleAdopted(id) {
+        setAdopted(!adopted)
+        const adoptionRef = doc(db, "pets", id.id);
+        await updateDoc(adoptionRef, {
+            available: adopted
+        }).catch(err => {
+            console.log('Erro ao atualizar status do pet')
+        }).finally(() => {
+            console.log('Status de animal atualizado com sucesso')
+        })
     }
 
     return (
@@ -85,11 +100,11 @@ export function Dashboard() {
                                 </div>
                                 <div className={styles.remove__item}>
                                     <button onClick={() => handleRemove(item)}>
-                                        <BsFillTrash3Fill size={20} color='#000' />
+                                        <BsFillTrash3Fill size={15} color='#000' />
                                     </button>
 
-                                    <button onClick={() => handleRemove(item)}>
-                                        <BsFillTrash3Fill size={20} color='#000' />
+                                    <button onClick={() => handleAdopted(item)} style={{ backgroundColor: item.disponivel ? '' : 'red' }}>
+                                        {item.disponivel ? <SlHeart size={15} color='#000' /> : <SlHeart size={15} color={item.disponivel ? '#000' : '#fff'} />}
                                     </button>
                                 </div>
                             </div>
