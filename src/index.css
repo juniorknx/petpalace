@@ -17,3 +17,29 @@ button {
 input {
   outline: none;
 }
+
+.swiper-button-prev::after {
+  color: #000;
+  font-size: 15px !important;
+  background-color: #FFBD59;
+  padding: 8px;
+  border-radius: 50%;
+  height: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.swiper-button-next::after {
+  color: #000;
+  font-size: 15px !important;
+  background-color: #FFBD59;
+  padding: 8px;
+  border-radius: 50%;
+  height: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
