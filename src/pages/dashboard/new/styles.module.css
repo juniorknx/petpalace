@@ -56,10 +56,25 @@
 
 .imagesUploaded>div>button {
     position: absolute;
-    bottom: 74px;
     background-color: #ffffffd4;
     padding: 4px;
     border-radius: 14px;
+}
+
+.selectOptions {
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+    padding: 5px 0px;
+}
+
+.selectOptions > select {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    height: 40px;
+    border-radius: 3px;
+    outline: none;
+    width: 170px;
 }
 
 input::file-selector-button {

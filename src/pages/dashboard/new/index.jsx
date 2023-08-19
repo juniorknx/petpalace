@@ -17,28 +17,31 @@ import {
     deleteObject
 } from 'firebase/storage'
 import { addDoc, collection } from 'firebase/firestore'
+import estados from './estados.json'
+import cidades from './cidades.json'
 
 export function CadastrarPet() {
     const { user } = useContext(AuthContext)
     const [dogImages, setDogImages] = useState([])
     const [loading, setLoading] = useState(false)
     const [uploadLoading, setUploadLoading] = useState(false)
+    const [listaEstados, setListaEstados] = useState(estados.UF);
+    const [listaCidades, setListaCidades] = useState(cidades)
     const [formData, setFormData] = useState({
         nome: '',
+        sexo: '',
         raca: '',
-        cor: '',
         idade: '',
         peso: '',
         cidade: '',
         estado: '',
         whatsapp: '',
         description: '',
-        owner: '',
         available: true,
         photos: []
     })
 
-    const { raca, cor, peso, idade, nome, cidade, estado, owner, photos, available, description, whatsapp } = formData
+    const { raca, sexo, peso, idade, nome, cidade, estado, photos, available, description, whatsapp } = formData
 
     function onChange(e) {
         setFormData((prevState) => ({
@@ -46,6 +49,23 @@ export function CadastrarPet() {
             [e.target.id]: e.target.value
         }))
     }
+
+    {/* Controla o estado do select */ }
+    const handleEstadoChange = (event) => {
+        const selectedValue = event.target.value;
+        setFormData((prevState) => ({
+            ...prevState,
+            estado: selectedValue
+        }));
+    };
+
+    const handleCidadeChange = (event) => {
+        const selectedValue = event.target.value;
+        setFormData((prevState) => ({
+            ...prevState,
+            cidade: selectedValue
+        }));
+    };
 
     {/*Upload files */ }
     async function handleFile(e) {
@@ -119,8 +139,8 @@ export function CadastrarPet() {
 
         addDoc(collection(db, 'pets'), {
             nome: nome?.toUpperCase(),
-            raca: raca.toUpperCase(),
-            cor,
+            sexo: sexo?.toUpperCase(),
+            raca: raca?.toUpperCase(),
             idade,
             peso,
             cidade,
@@ -137,8 +157,8 @@ export function CadastrarPet() {
             console.log('Data addedd!')
             setFormData({
                 nome: '',
+                sexo: '',
                 raca: '',
-                cor: '',
                 idade: '',
                 peso: '',
                 cidade: '',
@@ -146,7 +166,7 @@ export function CadastrarPet() {
                 whatsapp: '',
                 description: '',
                 photos: [],
-                available: true // or set it to the initial value for the 'available' field
+                available: true
             });
             setDogImages([])
         }).catch((err) => {
@@ -180,6 +200,17 @@ export function CadastrarPet() {
 
                         <Input
                             type="text"
+                            placeholder="Macho/Fêmea"
+                            maxlength="5"
+                            id="sexo"
+                            value={sexo}
+                            onChange={onChange}
+                            style={{ width: '340px' }}
+                            required
+                        />
+
+                        <Input
+                            type="text"
                             placeholder="Raça"
                             id="raca"
                             value={raca}
@@ -189,17 +220,7 @@ export function CadastrarPet() {
                         />
 
                         <Input
-                            type="text"
-                            placeholder="Cor"
-                            id="cor"
-                            value={cor}
-                            onChange={onChange}
-                            style={{ width: '340px' }}
-                            required
-                        />
-
-                        <Input
-                            type="text"
+                            type="number"
                             placeholder="Idade"
                             id="idade"
                             value={idade}
@@ -209,7 +230,7 @@ export function CadastrarPet() {
                         />
 
                         <Input
-                            type="text"
+                            type="number"
                             placeholder="Peso"
                             id="peso"
                             value={peso}
@@ -217,25 +238,26 @@ export function CadastrarPet() {
                             style={{ width: '340px' }}
                         />
 
-                        <Input
-                            type="text"
-                            placeholder="Cidade"
-                            id="cidade"
-                            value={cidade}
-                            onChange={onChange}
-                            style={{ width: '340px' }}
-                            required
-                        />
 
-                        <Input
-                            type="text"
-                            placeholder="Estado"
-                            id="estado"
-                            value={estado}
-                            onChange={onChange}
-                            style={{ width: '340px' }}
-                            required
-                        />
+                        <div className={styles.selectOptions}>
+                            <select value={estado} id="estado" onChange={handleEstadoChange}>
+                                <option value="">Selecione UF</option>
+                                {listaEstados.map((state) => (
+                                    <option key={state.sigla} value={state.sigla}>
+                                        {state.sigla}
+                                    </option>
+                                ))}
+                            </select>
+
+                            <select value={cidade} id="cidade" onChange={handleCidadeChange}>
+                                <option value="">Selecione Cidade</option>
+                                {listaCidades.map((city) => (
+                                    <option key={city.id} value={city.Nome}>
+                                        {city.Nome}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
                         <Input
                             type="text"
@@ -260,21 +282,22 @@ export function CadastrarPet() {
                             {uploadLoading === true ? <Loading size={'small'} /> : (
                                 dogImages.map(item => (
                                     <div key={item?.name}>
-                                        <img src={item?.previewUrl} alt='Dog Image' />
                                         <button onClick={() => handleDeleteImage(item)}>
                                             <FiTrash size={21} color="#000" />
                                         </button>
+                                        <img src={item?.previewUrl} alt='Dog Image' />
                                     </div>
                                 ))
                             )}
                         </div>
 
-                        <textarea name="description" id="description" value={description} onChange={onChange} rows="4" required></textarea>
+                        <textarea placeholder={`Escreva sobre ${nome}`} name="description" id="description" value={description} onChange={onChange} rows="4" required></textarea>
                     </div>
                     <button type='submit'>
                         {loading ? <Loading size='small' /> : 'Enviar'}
                     </button>
                 </form>
+
             </div>
         </Container>
     )
