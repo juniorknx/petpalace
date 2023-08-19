@@ -249,14 +249,18 @@ export function CadastrarPet() {
                                 ))}
                             </select>
 
-                            <select value={cidade} id="cidade" onChange={handleCidadeChange}>
-                                <option value="">Selecione Cidade</option>
+
+                            <input
+                                list="cidades-list"
+                                value={cidade}
+                                onChange={handleCidadeChange}
+                                placeholder="Digite uma cidade"
+                            />
+                            <datalist id="cidades-list">
                                 {listaCidades.map((city) => (
-                                    <option key={city.id} value={city.Nome}>
-                                        {city.Nome}
-                                    </option>
+                                    <option key={city.id} value={city.Nome} />
                                 ))}
-                            </select>
+                            </datalist>
                         </div>
 
                         <Input

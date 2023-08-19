@@ -77,6 +77,16 @@
     width: 170px;
 }
 
+.selectOptions > input {
+    background: #F8F8F8;
+    border: solid 1px #e3e3e3;
+    height: 38px;
+    border-radius: 3px;
+    outline: none;
+    width: 170px;
+    padding: 0 4px;
+}
+
 input::file-selector-button {
     font-weight: bold;
     padding: 0.5em;
