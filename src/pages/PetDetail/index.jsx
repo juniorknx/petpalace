@@ -5,6 +5,7 @@ import { db } from "../../services/firebaseConfig"
 import { doc, getDoc, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { MdOutlinePets } from 'react-icons/md'
 import { FaWhatsappSquare } from 'react-icons/fa';
 import { GrMail } from 'react-icons/gr'
@@ -51,7 +52,18 @@ export function PetDetail() {
             <div className={styles.pet__container}>
                 <div className={styles.slider__container}>
                     {pet && (
-                        <Swiper pagination={{ clickable: true }} scrollbar={{ draggable: true }}>
+                        <Swiper spaceBetween={30}
+                            centeredSlides={true}
+                            autoplay={{
+                                delay: 7500,
+                                disableOnInteraction: false,
+                            }}
+                            pagination={{
+                                clickable: true,
+                            }}
+                            navigation={true}
+                            modules={[Autoplay, Navigation]}
+                            className={styles.mySwiper}>
                             {pet.images?.map(item => {
                                 return (
                                     <SwiperSlide key={item?.name}>
