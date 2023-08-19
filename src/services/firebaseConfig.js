@@ -6,12 +6,12 @@ import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBRR6rQtc0Sm9iVCW-abNqYhkrHsP8eveU",
-    authDomain: "petpalace-a2a9e.firebaseapp.com",
-    projectId: "petpalace-a2a9e",
-    storageBucket: "petpalace-a2a9e.appspot.com",
-    messagingSenderId: "300235805418",
-    appId: "1:300235805418:web:da616975920bf6016e3d93"
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTHDOMAIN,
+    projectId: import.meta.env.VITE_PROJECTID,
+    storageBucket: import.meta.env.VITE_BUCKET,
+    messagingSenderId: import.meta.env.SENDERID,
+    appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase
