@@ -1,0 +1,103 @@
+.header {
+    font-size: 15.1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header>h1>span {
+    color: #FFBD59;
+    font-size: 25px;
+}
+
+.feed__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 27px;
+    margin: 3em 0em;
+}
+
+.feed_card {
+    max-width: 230px;
+    background: #f8f8f8e3;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.feed_card>img {
+    width: 100%;
+    max-height: 225px;
+}
+
+.card__title {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 6px;
+}
+
+.adopt_green {
+    color: #fff;
+    background: green;
+    font-size: 12px;
+    padding: 2px 1px;
+    border-radius: 2px;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+}
+
+.adopt_red {
+    color: #000;
+    background: #FFBD59;
+    font-size: 12px;
+    padding: 2px 1px;
+    border-radius: 2px;
+    display: block;
+    text-align: center;
+    font-weight: 700;
+}
+
+.notfound_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px #e3e3e3;
+    padding: 20px;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.notfound_container > h1 {
+    font-size: 25px;
+}
+
+.notfound_container > img {
+    width: 230px;
+}
+
+.notfound_container > a {
+    border-radius: 7px;
+    border: 0.25px solid #CBCBCB;
+    background: rgba(217, 217, 217, 0.00);
+    color: #000;
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    padding: 7.5px 17px;
+    align-items: flex-start;
+    gap: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+    margin-top: 19px;
+}

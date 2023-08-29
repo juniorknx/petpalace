@@ -6,8 +6,7 @@ import { CiLocationOn } from "react-icons/ci"
 import { db } from "../../services/firebaseConfig"
 import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
 import { useEffect, useState } from 'react';
-import { Loading } from '../../components/Loader'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -17,6 +16,8 @@ export function Home() {
     const [input, setInput] = useState('')
     const [noResultsFound, setNoResultsFound] = useState(false);
     const [recentSearch, setRecentSearch] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadPets()
@@ -57,43 +58,11 @@ export function Home() {
 
     async function handleSearchInput(e) {
         e.preventDefault()
-
+        navigate(`/busca/${input}`)
         if (input === '') {
             alert('Digite o nome de uma cidade.')
             return
         }
-
-        setPets([])
-
-        const q = query(collection(db, "pets"),
-            where("cidade", ">=", input.toUpperCase()),
-            where("cidade", "<=", input.toUpperCase() + "\uf8ff")
-        );
-
-        const querySnapshot = await getDocs(q)
-
-        let dogList = []
-        querySnapshot.forEach((doc) => {
-            dogList.push({
-                id: doc.id,
-                nome: doc.data().nome,
-                cor: doc.data().cor,
-                peso: doc.data().peso,
-                raca: doc.data().raca,
-                idade: doc.data().idade,
-                images: doc.data().images,
-                descricao: doc.data().description,
-                estado: doc.data().estado,
-                cidade: doc.data().cidade,
-                disponivel: doc.data().available,
-                criado: doc.data().created
-            })
-        })
-
-        if (dogList.length === 0) {
-            setNoResultsFound(true);
-        }
-        setPets(dogList)
     }
 
     {/* Add recent searches */ }
