@@ -8,6 +8,8 @@ import { collection, addDoc, getDocs, orderBy, query, where, limit } from "fireb
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loader'
 import { Link } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export function Home() {
     const [pets, setPets] = useState([])
@@ -171,7 +173,7 @@ export function Home() {
 
             <div className={styles.feed}>
                 <div>
-                    <h2>Animais para adoção <span>{loading ? <Loading size={'small'} /> : pets.length}</span></h2>
+                    <h2>Animais para adoção <span>{loading ? <Skeleton count={6} /> : pets.length}</span></h2>
                 </div>
 
                 <div className={styles.feed__grid}>
