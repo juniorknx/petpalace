@@ -59,15 +59,15 @@ export function Home() {
         e.preventDefault()
 
         if (input === '') {
-            loadPets()
+            alert('Digite o nome de uma cidade.')
             return
         }
 
         setPets([])
 
         const q = query(collection(db, "pets"),
-            where("raca", ">=", input.toUpperCase()),
-            where("raca", "<=", input.toUpperCase() + "\uf8ff")
+            where("cidade", ">=", input.toUpperCase()),
+            where("cidade", "<=", input.toUpperCase() + "\uf8ff")
         );
 
         const querySnapshot = await getDocs(q)
@@ -145,14 +145,13 @@ export function Home() {
                     <form onSubmit={handleSearchInput}>
                         <input
                             type='text'
-                            placeholder='Pesquisar doguinhos, caramelos e gatos...'
+                            placeholder='Pesquise por cidade..'
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                         />
 
                         <button type='submit' className={styles.search__button} onClick={handleRecentSearch}>
                             <HiSearch size={23} color='#fff' />
-                            Buscar
                         </button>
                     </form>
                 </div>
