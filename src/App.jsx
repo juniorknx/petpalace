@@ -7,6 +7,7 @@ import { PrivateRoute } from './routes/Private'
 import { Login } from './pages/Login'
 import { CadastrarPet } from './pages/dashboard/new'
 import { PetDetail } from './pages/PetDetail'
+import { SearchPage } from './pages/SearchPage'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/pet/:id",
         element: <PetDetail />
+      },
+      {
+        path: "/busca/:id",
+        element: <SearchPage />
       }
     ]
   }

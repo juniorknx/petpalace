@@ -143,7 +143,7 @@ export function CadastrarPet() {
             raca: raca?.toUpperCase(),
             idade,
             peso,
-            cidade,
+            cidade: cidade?.toUpperCase(),
             estado,
             whatsapp,
             images: dogListImage,
