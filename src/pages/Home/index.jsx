@@ -58,15 +58,18 @@ export function Home() {
 
     async function handleSearchInput(e) {
         e.preventDefault()
-        navigate(`/busca/${input}`)
         if (input === '') {
             alert('Digite o nome de uma cidade.')
             return
         }
+        navigate(`/busca/${input}`)
     }
 
     {/* Add recent searches */ }
     async function handleRecentSearch() {
+        if (input === '' || undefined) {
+            return
+        }
         const docRef = addDoc(collection(db, "recent"), {
             recent: input
         }).then(() => {
@@ -146,7 +149,7 @@ export function Home() {
 
                 <div className={styles.feed__grid}>
                     {loading ? (
-                        <Skeleton count={5}/>
+                        <Skeleton count={5} />
                     ) : (
                         <Card data={pets} />
                     )}
