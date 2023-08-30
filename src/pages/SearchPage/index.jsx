@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom"
 import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
-import { MdOutlinePets } from "react-icons/md";
-import { CiLocationOn } from "react-icons/ci"
 import { Link } from "react-router-dom"
 import { db } from "../../services/firebaseConfig"
 import { useEffect, useState } from "react"
@@ -12,6 +10,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa'
 import { IoBackspaceOutline } from 'react-icons/io5'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Card from "../../components/Card";
 
 export function SearchPage() {
     const { id } = useParams()
@@ -69,28 +68,7 @@ export function SearchPage() {
                 {loading ? (
                     <Skeleton count={5} />
                 ) : (
-                    pets.map((item) => {
-                        return (
-                            loading ? (
-                                <Skeleton count={5} />
-                            ) : (
-                                <Link key={item.id} to={`/pet/${item.id}`} style={{ textDecoration: 'none' }}>
-                                    <div key={item.id} className={styles.feed_card}>
-                                        <span className={item.disponivel ? styles.adopt_green : styles.adopt_red}>{item.disponivel ? 'Disponível para adoção' : 'Felizmente esse peludo foi adotado!'}</span>
-                                        <img src={item.images[0].url} alt={item.raca} loading='lazy' />
-                                        <div className={styles.card__title}>
-                                            <MdOutlinePets size={17} color='#FFBD59' />
-                                            <p>{item.nome}</p>
-                                        </div>
-                                        <div className={styles.card__title}>
-                                            <CiLocationOn size={17} color='#FFBD59' />
-                                            <p>{item.cidade} - {item.estado}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            )
-                        )
-                    })
+                    <Card data={pets} />
                 )}
             </div>
             {NoResultsFound &&

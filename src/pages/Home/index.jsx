@@ -1,14 +1,14 @@
 import styles from './styles.module.css'
 import { Container } from "../../components/Container";
 import { HiSearch } from "react-icons/hi";
-import { MdOutlinePets } from "react-icons/md";
-import { CiLocationOn } from "react-icons/ci"
 import { db } from "../../services/firebaseConfig"
 import { collection, addDoc, getDocs, orderBy, query, where, limit } from "firebase/firestore"
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Card from '../../components/Card';
+import { Loading } from '../../components/Loader';
 
 export function Home() {
     const [pets, setPets] = useState([])
@@ -58,15 +58,18 @@ export function Home() {
 
     async function handleSearchInput(e) {
         e.preventDefault()
-        navigate(`/busca/${input}`)
         if (input === '') {
             alert('Digite o nome de uma cidade.')
             return
         }
+        navigate(`/busca/${input}`)
     }
 
     {/* Add recent searches */ }
     async function handleRecentSearch() {
+        if (input === '' || undefined) {
+            return
+        }
         const docRef = addDoc(collection(db, "recent"), {
             recent: input
         }).then(() => {
@@ -141,31 +144,14 @@ export function Home() {
 
             <div className={styles.feed}>
                 <div>
-                    <h2>Animais para adoção <span>{loading ? <Skeleton count={6} /> : pets.length}</span></h2>
+                    <h2>Animais para adoção <span>{loading ? <Loading size={'small'} /> : pets.length}</span></h2>
                 </div>
 
                 <div className={styles.feed__grid}>
                     {loading ? (
-                        <div></div>
+                        <Skeleton count={5} />
                     ) : (
-                        pets.map((item) => {
-                            return (
-                                <Link key={item.id} to={`/pet/${item.id}`} style={{ textDecoration: 'none' }}>
-                                    <div key={item.id} className={styles.feed_card}>
-                                        <span className={item.disponivel ? styles.adopt_green : styles.adopt_red}>{item.disponivel ? 'Disponível para adoção' : 'Felizmente esse peludo foi adotado!'}</span>
-                                        <img src={item.images[0].url} alt={item.raca} loading='lazy' />
-                                        <div className={styles.card__title}>
-                                            <MdOutlinePets size={17} color='#FFBD59' />
-                                            <p>{item.nome}</p>
-                                        </div>
-                                        <div className={styles.card__title}>
-                                            <CiLocationOn size={17} color='#FFBD59' />
-                                            <p>{item.cidade} - {item.estado}</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            )
-                        })
+                        <Card data={pets} />
                     )}
                     {noResultsFound && <p>Nenhum resultado encontrado.</p>}
                 </div>
