@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Card from '../../components/Card';
 import { Loading } from '../../components/Loader';
+import Cta from '../../components/CallToAction';
 
 export function Home() {
     const [pets, setPets] = useState([])
@@ -29,7 +30,7 @@ export function Home() {
 
     async function loadPets() {
         const dogRef = collection(db, "pets")
-        const queryRef = query(dogRef, orderBy("created", "desc"))
+        const queryRef = query(dogRef, orderBy("created", "desc"), limit(8))
 
         getDocs(queryRef)
             .then((snapshot) => {
@@ -155,6 +156,11 @@ export function Home() {
                     )}
                     {noResultsFound && <p>Nenhum resultado encontrado.</p>}
                 </div>
+            </div>
+            <div className={styles.see_more_container}>
+                <Link to={'pets'}>
+                        Ver mais
+                </Link>
             </div>
         </Container>
     )
