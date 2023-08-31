@@ -118,6 +118,31 @@
     line-height: normal;
 }
 
+.see_more_container {
+    display: flex;
+    justify-content: center;
+}
+
+.see_more_container > a {
+    text-decoration: none;
+    border-radius: 7px;
+    border: 0.25px solid #CBCBCB;
+    background: rgba(217, 217, 217, 0.00);
+    color: #000;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    padding: 7.5px 17px;
+    align-items: flex-start;
+    justify-content: center;
+    width: 120px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .feed__grid {

@@ -168,21 +168,29 @@
     background: green;
     font-size: 12px;
     padding: 2px 1px;
-    border-radius: 2px;
     display: block;
     text-align: center;
     font-weight: 700;
+    width: 88px;
+    position: absolute;
+    border-radius: 9px;
+    margin-top: 6px;
+    margin-left: 10px;
 }
 
 .adopt_red {
-    color: #000;
-    background: #FFBD59;
+    color: #fff;
+    background:#FFBD59;
     font-size: 12px;
     padding: 2px 1px;
-    border-radius: 2px;
     display: block;
     text-align: center;
     font-weight: 700;
+    width: 88px;
+    position: absolute;
+    border-radius: 9px;
+    margin-top: 6px;
+    margin-left: 10px;
 }
 
 
