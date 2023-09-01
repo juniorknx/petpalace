@@ -20,7 +20,7 @@ const Card = React.memo(({ data }) => {
                         </div>
                         <div className={styles.card__title}>
                             <CiLocationOn size={17} color='#FFBD59' />
-                            <p>{item.cidade} - {item.estado}</p>
+                            <p>{item.cidade.toLowerCase()} - {item.estado}</p>
                         </div>
                     </div>
                 </Link>

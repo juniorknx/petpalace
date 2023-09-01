@@ -23,10 +23,6 @@ export function Header() {
                     <Link to={'/'} className={styles.nav__link}>
                         Adote
                     </Link>
-
-                    <Link to={'/'} className={styles.nav__link}>
-                        Ajude-me
-                    </Link>
                 </nav>
 
                 <div>
