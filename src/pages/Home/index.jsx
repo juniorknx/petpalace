@@ -10,6 +10,11 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Card from '../../components/Card';
 import { Loading } from '../../components/Loader';
 import Cta from '../../components/CallToAction';
+import InfoCards from '../../components/InfoCards';
+import dog from '../../assets/caozinho.png';
+import dogTutor from '../../assets/cao-tutor.png';
+import people from '../../assets/people.png';
+import smartphone from '../../assets/smartphone.png';
 
 export function Home() {
     const [pets, setPets] = useState([])
@@ -159,8 +164,30 @@ export function Home() {
             </div>
             <div className={styles.see_more_container}>
                 <Link to={'pets'}>
-                        Ver mais
+                    Ver mais
                 </Link>
+            </div>
+
+            <div className={styles.minicards_container}>
+                <InfoCards
+                    icon={dog}
+                    text={'Existem mais de 30 milhões de cachorros em situação de rua no Brasil.'}
+                />
+
+                <InfoCards
+                    icon={people}
+                    text={'Ao mesmo tempo, existem milhares de pessoas querendo adotar um cachorro.'}
+                />
+
+                <InfoCards
+                    icon={smartphone}
+                    text={'Muitas vezes essas pessoas não sabem onde procurar os cães disponíveis para adoção.'}
+                />
+
+                <InfoCards
+                    icon={dogTutor}
+                    text={'Nossa missão é conectar esses cães com essas pessoas e proporcionar um final feliz.'}
+                />
             </div>
         </Container>
     )

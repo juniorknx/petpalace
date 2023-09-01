@@ -143,9 +143,26 @@
     text-transform: uppercase;
 }
 
+.minicards_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 27px;
+    padding: 25px;
+    margin: 7em 0em;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .feed__grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .minicards_container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 27px;
+        padding: 2px;
+        margin: 7em 0em;
+    }
+    
 }
