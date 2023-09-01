@@ -86,7 +86,7 @@
 .search__recents {
     text-align: center;
     margin-top: 10px;
-    font-size: 12px; 
+    font-size: 12px;
 }
 
 .search__recents>span {
@@ -125,7 +125,7 @@
     margin: 3em 0em;
 }
 
-.feed__grid > a {
+.feed__grid>a {
     max-width: 250px;
 }
 
@@ -136,6 +136,8 @@
     box-shadow: 0px 4px 28px -2px rgb(146 146 146 / 40%);
     transition: 0.2s;
     border-radius: 8px;
+    height: 280px;
+    overflow: hidden;
 }
 
 .feed_card:hover {
@@ -181,7 +183,7 @@
 
 .adopt_red {
     color: #fff;
-    background:#FFBD59;
+    background: #FFBD59;
     font-size: 12px;
     padding: 2px 1px;
     display: block;
@@ -199,5 +201,29 @@
 @media (max-width: 768px) {
     .feed__grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card__title {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        color: #000;
+        font-size: 12.8px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-top: 6px;
+        text-transform: capitalize;
+    }
+
+    .feed_card {
+        background: #f8f8f8e3;
+        padding: 10px;
+        cursor: pointer;
+        box-shadow: 0px 4px 28px -2px rgb(146 146 146 / 40%);
+        transition: 0.2s;
+        border-radius: 8px;
+        height: 250px;
+        overflow: hidden;
     }
 }
